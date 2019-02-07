@@ -1,0 +1,26 @@
+
+body {
+	background-image: url('../images/board_1.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+	background-color: #ffffff;
+}
+
+
+/*body {
+	background-image: url('');
+	background-color: #808B96;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+}*/
+
+.bg-wood {
+    background-image: url('../images/board_1.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    /*color: #ffffff;*/
+    /*background-color:rgba(0, 0, 0, 0.550);*/
+}

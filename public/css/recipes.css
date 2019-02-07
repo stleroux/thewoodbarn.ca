@@ -1,0 +1,19 @@
+body {
+	background-image: url('../images/recipes.jpg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-attachment: fixed;
+}
+
+/*
+Was used in alphabet panel
+.alphabet {
+	width: 40px;
+	margin-bottom: 3px;
+}
+*/
+
+.alphabet {
+	/*width: 28px;*/
+	margin-bottom: 3px;
+}

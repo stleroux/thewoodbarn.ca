@@ -1,0 +1,208 @@
+@extends ('layouts.main')
+
+@section ('title', '| Create new Recipe')
+
+@section ('stylesheets')
+	{{ Html::style('css/recipes.css') }}
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+@stop
+
+@section ('content')
+	<ol class="breadcrumb">
+		<li><a href="/">Home</a></li>
+		<li><a href="{{ route('recipes.index','all') }}">Recipes</a></li>
+		<li class="active">Update Recipe</li>
+	</ol>
+
+	{!! Form::model($recipe, ['route'=>['recipes.update', $recipe->id], 'method' => 'PUT', 'files' => true]) !!}
+	<!--
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="pull-right">
+						{!! link_to(URL::previous(), 'Cancel', ['class' => 'btn btn-default']) !!}
+						{{ Form::submit ('Create Recipe', array('class' => 'btn btn-success')) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	-->
+	<div class="row">
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-heading">Update Recipe</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">Title</div>
+								<div class="panel-body {{ $errors->has('title') ? 'has-error' : '' }}">
+									{{ Form::text ('title', null, array('class' => 'form-control', 'autofocus'=>'autofocus')) }}
+									<span class="text-danger">{{ $errors->first('title') }}</span>
+								</div>
+							</div>
+				    	</div>
+				    </div>
+			    	
+					<div class="row">
+						<div class="col-md-8">
+							<div class="panel panel-default">
+								<div class="panel-heading">Ingredients</div>
+								<div class="panel-body {{ $errors->has('ingredients') ? 'has-error' : '' }}">
+	    							{{ Form::textarea ('ingredients', null, array('class' => 'form-control simple', 'rows'=>'5')) }}
+	    							<span class="text-danger">{{ $errors->first('ingredients') }}</span>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">Methodology</div>
+								<div class="panel-body {{ $errors->has('methodology') ? 'has-error' : '' }}">
+									{{ Form::textarea ('methodology', null, array('class' => 'form-control simple', 'rows'=>'4')) }}
+									<span class="text-danger">{{ $errors->first('methodology') }}</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="panel panel-default">
+								<div class="panel-heading">Image</div>
+								<div class="panel-body text-center">
+	    							@if ($recipe->image)
+	            						{{ Html::image("images/recipes/" . $recipe->image, "", array('height'=>'150','width'=>'150')) }}
+							        @else
+							            <i class="fa fa-5x fa-ban" aria-hidden="true"></i>
+							        @endif
+	    							<br /><br />
+	    							{{ Form::file('image', ['class'=>'form-control']) }}
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-3">
+							<div class="panel panel-default">
+								<div class="panel-heading">Category</div>
+								<div class="panel-body">
+									{{ Form::select('category_id', $categories, null, ['class'=>'form-control']) }}
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="panel panel-default">
+								<div class="panel-heading">Servings</div>
+								<div class="panel-body {{ $errors->has('servings') ? 'has-error' : '' }}">
+									{{ Form::text ('servings', null, array('class' => 'form-control')) }}
+									<span class="text-danger">{{ $errors->first('servings') }}</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="panel panel-default">
+								<div class="panel-heading">Prep Time</div>
+								<div class="panel-body {{ $errors->has('prep_time') ? 'has-error' : '' }}">
+									{{ Form::text ('prep_time', null, array('class' => 'form-control')) }}
+									<span class="text-danger">{{ $errors->first('prep_time') }}</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="panel panel-default">
+								<div class="panel-heading">Cook Time</div>
+								<div class="panel-body {{ $errors->has('cook_time') ? 'has-error' : '' }}">
+									{{ Form::text ('cook_time', null, array('class' => 'form-control')) }}
+									<span class="text-danger">{{ $errors->first('cook_time') }}</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="panel panel-default">
+								<div class="panel-heading">Personal</div>
+								<div class="panel-body text-center">
+									{{-- {{ Form::select('personal', array('0' => 'No', '1' => 'Yes'), null, array('class'=>'form-control')) }} --}}
+									{{ Form::checkbox('personal', 1, null, ['data-toggle=toggle', 'data-on="Yes"', 'data-off="No"', 'data-onstyle="success"', 'data-offstyle="danger"']) }}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">Public Notes</div>
+								<div class="panel-body">
+									{{ Form::textarea ('public_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">Author's Personal Notes</div>
+								<div class="panel-body">
+									{{ Form::textarea ('author_notes', null, array('class' => 'form-control simple', 'rows'=>'2')) }}
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="panel panel-default">
+								<div class="panel-heading">Source</div>
+								<div class="panel-body">
+									{{ Form::text ('source', null, array('class' => 'form-control')) }}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">Options</div>
+				<div class="panel-body">
+
+					{{Form::button('<div class="text text-left"><i class="fa fa-floppy-o" aria-hidden="true"></i> Update Recipe</div>', array('type' => 'submit', 'class' => 'btn btn-success btn-block'))}}
+					
+					{{-- @if ((Auth::user()->hasAnyRole(['editor', 'admin'])) && ($recipe->image)) --}}
+						<a href="{{ route('recipes.delete_image', $recipe->id) }}" class="btn btn-danger btn-block">
+							<div class="text text-left">
+								<i class="fa fa-trash-o" aria-hidden="true"></i> Delete Image
+							</div>
+						</a>
+					{{-- @endif --}}
+
+					<a href="{{ route('recipes.index','all') }}" class="btn btn-default btn-block">
+						<div class="text text-left">
+							<i class="fa fa-ban" aria-hidden="true"></i> Cancel
+						</div>
+					</a>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">Information</div>
+				<div class="panel-body">
+					Created By : @include('partials._author', ['model'=>$recipe , 'field'=>'user']) <br />
+					Created On : @include('partials._dateFormat', ['model'=>$recipe, 'field'=>'created_at']) <br />
+
+					@if ($recipe->modified_by_id)
+						<br />
+						Modified By : @include('partials._author', ['model'=>$recipe , 'field'=>'modified_by']) <br />
+						Modified On : @include('partials._dateFormat', ['model'=>$recipe, 'field'=>'updated_at']) <br />
+					@endif
+					@if ($recipe->last_viewed_by_id)
+						<br />
+						Last Viewed By : @include('partials._author', ['model'=>$recipe , 'field'=>'last_viewed_by']) <br />
+						Last Viewed On : @include('partials._dateFormat', ['model'=>$recipe, 'field'=>'last_viewed_on']) <br />
+					@endif
+				</div>
+			</div>
+		</div>
+	</div>
+	{!! Form::close() !!}
+@stop
+
+@section ('scripts')
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+@stop

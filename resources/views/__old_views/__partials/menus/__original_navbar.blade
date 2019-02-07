@@ -1,0 +1,42 @@
+{{-- <!-- Default Bootstrap navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<div class="navbar-brand">TheWoodBarn.ca</div>
+		</div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+		
+
+		<div class="collapse navbar-collapse" id="navbar-collapse">
+			@include ('partials.menus.top_menu')
+
+			@include('partials.menus.modules')
+
+			<ul class="nav navbar-nav navbar-right">
+				@if (Auth::check())
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ ucwords(Auth::user()->first_name) }}'s Account <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							@include ('partials.menus.dropdown')
+							<li><a href="{{ route('logout') }}"><i class="fa fa-power-off">&nbsp;</i>Logout</a></li>
+						</ul>
+					</li>
+				@else
+					@include ('partials.menus.not_logged_in')
+				@endif
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+<br />
+<br />
+<br />
+<br /> --}}
